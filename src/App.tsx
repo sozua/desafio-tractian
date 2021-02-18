@@ -3,19 +3,17 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import GlobalRoutes from "./components/AppRoutes/GlobalRoutes/";
-import TopbarMenu from "./components/TopbarMenu";
+import HeaderMenu from "./components/HeaderMenu";
 
 function App() {
   return (
     <BrowserRouter>
-      <Layout className="layout">
-        <TopbarMenu />
+      <Layout>
+        <HeaderMenu />
         <Content style={{ padding: "0 50px" }}>
           <GlobalRoutes />
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Footer aqui
-        </Footer>
+        <Footer style={{ textAlign: "center" }}>Footer aqui</Footer>
       </Layout>
     </BrowserRouter>
   );
