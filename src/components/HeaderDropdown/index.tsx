@@ -24,6 +24,7 @@ const HeaderDropdown = () => {
           <Menu.Item
             disabled={user.id === company.actualUser}
             onClick={() => handleChangeUser(user.id)}
+            key={user.id}
           >
             {user.name}
           </Menu.Item>
