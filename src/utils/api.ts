@@ -1,4 +1,4 @@
-import { UserProps } from "./types";
+import { UnityProps, UserProps } from "./types";
 
 const apiURI = "https://my-json-server.typicode.com/tractian/fake-api/";
 
@@ -10,6 +10,11 @@ export async function findCompany(id: number) {
 
 export async function findUnities(companyId: number) {
   const data = await fetch(`${apiURI}/units?companyId=${companyId}`);
+  const json = await data.json();
+  return json;
+}
+export async function findSingleUnity(unitId: number): Promise<UnityProps> {
+  const data = await fetch(`${apiURI}/units/${unitId}`);
   const json = await data.json();
   return json;
 }
@@ -26,15 +31,17 @@ export async function findSingleUser(userId: number): Promise<UserProps> {
   return json;
 }
 
-export async function findAssets(companyId: number, unitId?: number) {
-  let data;
-  const apiAssetsURI = `${apiURI}/assets?companyId=${companyId}`;
+export function findAssets(companyId: number, unitId?: number) {
+  return async () => {
+    let data;
+    const apiAssetsURI = `${apiURI}/assets?companyId=${companyId}`;
 
-  if (unitId) data = await fetch(apiAssetsURI);
-  else data = await fetch(`${apiAssetsURI}&unitId=${unitId}`);
+    if (unitId) data = await fetch(`${apiAssetsURI}&unitId=${unitId}`);
+    else data = await fetch(apiAssetsURI);
 
-  const json = await data.json();
-  return json;
+    const json = await data.json();
+    return json;
+  };
 }
 
 export async function findInAlertAssets(companyId: number, unitId?: number) {
