@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.5.0",
     "@reduxjs/toolkit": "^1.5.0",
     "antd": "^4.12.3",
     "highcharts": "^9.0.1",

@@ -1,9 +1,10 @@
-import Layout, { Content, Footer } from "antd/lib/layout/layout";
+import Layout, { Content } from "antd/lib/layout/layout";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import GlobalRoutes from "./components/AppRoutes/GlobalRoutes/";
+import { default as Footer } from "./components/Footer";
 import HeaderMenu from "./components/HeaderMenu";
 import {
   changeActualUser,
@@ -37,7 +38,7 @@ function App() {
         <Content style={{ padding: "0 50px" }}>
           <GlobalRoutes />
         </Content>
-        <Footer style={{ textAlign: "center" }}>Footer aqui</Footer>
+        <Footer />
       </Layout>
     </BrowserRouter>
   );
