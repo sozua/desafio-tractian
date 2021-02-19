@@ -19,10 +19,17 @@ export async function findSingleUnity(unitId: number): Promise<UnityProps> {
   return json;
 }
 
-export async function findUsers(companyId: number) {
-  const data = await fetch(`${apiURI}/users?companyId=${companyId}`);
-  const json = await data.json();
-  return json;
+export function findUsers(companyId: number, unitId?: number) {
+  return async (): Promise<[]> => {
+    let data;
+    const apiAssetsURI = `${apiURI}/users?companyId=${companyId}`;
+
+    if (unitId) data = await fetch(`${apiAssetsURI}&unitId=${unitId}`);
+    else data = await fetch(apiAssetsURI);
+
+    const json = await data.json();
+    return json;
+  };
 }
 
 export async function findSingleUser(userId: number): Promise<UserProps> {
@@ -44,24 +51,28 @@ export function findAssets(companyId: number, unitId?: number) {
   };
 }
 
-export async function findInAlertAssets(companyId: number, unitId?: number) {
-  let data;
-  const apiAssetsURI = `${apiURI}/assets?companyId=${companyId}&status=inAlert`;
+export function findInAlertAssets(companyId: number, unitId?: number) {
+  return async () => {
+    let data;
+    const apiAssetsURI = `${apiURI}/assets?companyId=${companyId}&status=inAlert`;
 
-  if (unitId) data = await fetch(apiAssetsURI);
-  else data = await fetch(`${apiAssetsURI}&unitId=${unitId}`);
+    if (unitId) data = await fetch(`${apiAssetsURI}&unitId=${unitId}`);
+    else data = await fetch(apiAssetsURI);
 
-  const json = await data.json();
-  return json;
+    const json = await data.json();
+    return json;
+  };
 }
 
-export async function findInDowntimeAssets(companyId: number, unitId?: number) {
-  let data;
-  const apiAssetsURI = `${apiURI}/assets?companyId=${companyId}&status=inDowntime`;
+export function findInDowntimeAssets(companyId: number, unitId?: number) {
+  return async () => {
+    let data;
+    const apiAssetsURI = `${apiURI}/assets?companyId=${companyId}&status=inDowntime`;
 
-  if (unitId) data = await fetch(apiAssetsURI);
-  else data = await fetch(`${apiAssetsURI}&unitId=${unitId}`);
+    if (unitId) data = await fetch(`${apiAssetsURI}&unitId=${unitId}`);
+    else data = await fetch(apiAssetsURI);
 
-  const json = await data.json();
-  return json;
+    const json = await data.json();
+    return json;
+  };
 }

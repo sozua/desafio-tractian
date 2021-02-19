@@ -21,12 +21,12 @@ function App() {
     async function loginCompany(companyId: number) {
       const company = await findCompany(companyId);
       const unities = await findUnities(companyId);
-      const users = await findUsers(companyId);
+      const users = await findUsers(companyId)();
 
       dispatch(changeName(company.name));
       dispatch(changeUnities(unities));
       dispatch(changeUsers(users));
-      if (users.length > 0) dispatch(changeActualUser(users[0].id));
+      if (users.length > 0) dispatch(changeActualUser(1));
     }
     loginCompany(1);
   }, [dispatch]);
