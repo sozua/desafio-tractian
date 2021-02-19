@@ -5,21 +5,27 @@ import { BrowserRouter } from "react-router-dom";
 
 import GlobalRoutes from "./components/AppRoutes/GlobalRoutes/";
 import HeaderMenu from "./components/HeaderMenu";
-import { changeName, changeUnities, changeUsers } from "./state/company/slicer";
-import { loadCompany, loadUnities, loadUsers } from "./utils/api";
+import {
+  changeActualUser,
+  changeName,
+  changeUnities,
+  changeUsers,
+} from "./state/company/slicer";
+import { findCompany, findUnities, findUsers } from "./utils/api";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     async function loginCompany(companyId: number) {
-      const company = await loadCompany(companyId);
-      const unities = await loadUnities(companyId);
-      const users = await loadUsers(companyId);
+      const company = await findCompany(companyId);
+      const unities = await findUnities(companyId);
+      const users = await findUsers(companyId);
 
       dispatch(changeName(company.name));
       dispatch(changeUnities(unities));
       dispatch(changeUsers(users));
+      if (users.length > 0) dispatch(changeActualUser(users[0].id));
     }
     loginCompany(1);
   }, [dispatch]);
