@@ -13,6 +13,7 @@ export async function findUnities(companyId: number) {
   const json = await data.json();
   return json;
 }
+
 export async function findSingleUnity(unitId: number): Promise<UnityProps> {
   const data = await fetch(`${apiURI}/units/${unitId}`);
   const json = await data.json();
@@ -72,6 +73,14 @@ export function findInDowntimeAssets(companyId: number, unitId?: number) {
     if (unitId) data = await fetch(`${apiAssetsURI}&unitId=${unitId}`);
     else data = await fetch(apiAssetsURI);
 
+    const json = await data.json();
+    return json;
+  };
+}
+
+export function findSingleAsset(assetId: string) {
+  return async () => {
+    const data = await fetch(`${apiURI}/assets/${assetId}`);
     const json = await data.json();
     return json;
   };
