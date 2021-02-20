@@ -12,15 +12,17 @@ const AssetsInDowntimeCard = () => {
   const { data, loading, apiRequest } = useLoadFromApi();
 
   useEffect(() => {
-    if (isLogged && actualUser.id && actualUser.id >= 0 && actualUser.companyId)
-      apiRequest(findInDowntimeAssets(actualUser.companyId, actualUser.id));
+    if (isLogged && actualUser.companyId)
+      apiRequest(findInDowntimeAssets(actualUser.companyId, actualUser.unitId));
   }, [actualUser, isLogged, apiRequest]);
 
   function onChange(event: RadioChangeEvent) {
     if (actualUser.companyId)
       switch (event.target.value) {
         case "userUnit":
-          apiRequest(findInDowntimeAssets(actualUser.companyId, actualUser.id));
+          apiRequest(
+            findInDowntimeAssets(actualUser.companyId, actualUser.unitId)
+          );
           break;
         default:
           apiRequest(findInDowntimeAssets(actualUser.companyId));

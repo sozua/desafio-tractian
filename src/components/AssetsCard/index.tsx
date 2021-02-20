@@ -12,15 +12,15 @@ const AssetsCard = () => {
   const { data, loading, apiRequest } = useLoadFromApi();
 
   useEffect(() => {
-    if (isLogged && actualUser.id && actualUser.id >= 0 && actualUser.companyId)
-      apiRequest(findAssets(actualUser.companyId, actualUser.id));
+    if (isLogged && actualUser.companyId)
+      apiRequest(findAssets(actualUser.companyId, actualUser.unitId));
   }, [actualUser, isLogged, apiRequest]);
 
   function onChange(event: RadioChangeEvent) {
     if (actualUser.companyId)
       switch (event.target.value) {
         case "userUnit":
-          apiRequest(findAssets(actualUser.companyId, actualUser.id));
+          apiRequest(findAssets(actualUser.companyId, actualUser.unitId));
           break;
         default:
           apiRequest(findAssets(actualUser.companyId));
