@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
-const useLoadFromApi = () => {
-  const [data, setData] = useState([]);
+const useLoadFromApi = (initialDataState: any = []) => {
+  const [data, setData] = useState(initialDataState);
   const [loading, setLoading] = useState(true);
 
   const apiRequest = useCallback(async (apiFunction: Function) => {
