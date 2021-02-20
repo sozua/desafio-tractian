@@ -19,7 +19,10 @@ interface ListCardProps {
 
 const ListCard = (props: ListCardProps) => {
   const radioButtons = (
-    <Radio.Group onChange={props.onRadioChange} defaultValue="userUnit">
+    <Radio.Group
+      onChange={props.onRadioChange}
+      defaultValue={props.radioButtons ? props.radioButtons[0].value : ""}
+    >
       {props.radioButtons?.map((radioButton) => (
         <Radio.Button value={radioButton.value} key={radioButton.value}>
           {radioButton.title}
