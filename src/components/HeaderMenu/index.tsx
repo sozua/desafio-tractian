@@ -9,7 +9,7 @@ const HeaderMenu = () => {
   return (
     <Header style={{ background: "white" }}>
       <Row justify="space-between" align="middle">
-        <Link to="/">
+        <Link to="/" style={{ display: "flex" }}>
           <img
             src="https://tractian.com/wp-content/uploads/tractian-logo-1974x269.png"
             alt="Logo da Tractian"
