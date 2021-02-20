@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useUserLogged from "../../hooks/useUserLogged";
 import { findAssets } from "../../utils/api";
 
-import { RadioChangeEvent } from "antd";
+import { Button, RadioChangeEvent } from "antd";
 import useLoadFromApi from "../../hooks/useLoadFromApi";
 import ListCard from "../ListCard";
 import assetsColumnsScheme from "./columnsScheme";
@@ -12,18 +12,19 @@ const AssetsCard = () => {
   const { data, loading, apiRequest } = useLoadFromApi();
 
   useEffect(() => {
-    if (isLogged && actualUser.id && actualUser.id >= 0)
-      apiRequest(findAssets(1, actualUser.id));
+    if (isLogged && actualUser.id && actualUser.id >= 0 && actualUser.companyId)
+      apiRequest(findAssets(actualUser.companyId, actualUser.id));
   }, [actualUser, isLogged, apiRequest]);
 
   function onChange(event: RadioChangeEvent) {
-    switch (event.target.value) {
-      case "userUnit":
-        apiRequest(findAssets(1, actualUser.id));
-        break;
-      default:
-        apiRequest(findAssets(1));
-    }
+    if (actualUser.companyId)
+      switch (event.target.value) {
+        case "userUnit":
+          apiRequest(findAssets(actualUser.companyId, actualUser.id));
+          break;
+        default:
+          apiRequest(findAssets(actualUser.companyId));
+      }
   }
 
   const radioButtons = [
@@ -39,6 +40,7 @@ const AssetsCard = () => {
       columns={assetsColumnsScheme}
       dataSource={data}
       loading={loading}
+      footerElement={<Button type="primary">Adicionar um novo ativo</Button>}
     />
   );
 };
