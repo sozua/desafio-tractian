@@ -11,3 +11,8 @@ export type UserProps = {
   unitId?: number;
   companyId?: number;
 };
+
+export type StatsProps = {
+  title?: string;
+  value?: any;
+};
