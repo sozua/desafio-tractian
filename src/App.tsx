@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import GlobalRoutes from "./components/AppRoutes/GlobalRoutes/";
+import GlobalRoutes from "./components/AppRoutes/";
 import { default as Footer } from "./components/Footer";
 import HeaderMenu from "./components/HeaderMenu";
 import {
