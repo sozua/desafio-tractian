@@ -9,20 +9,33 @@ import assetsColumnsScheme from "./columnsScheme";
 import ModalCreateUser from "../ModalCreateUser";
 
 const UsersCard = () => {
-  const { actualUser, isLogged } = useUserLogged();
-  const { data, loading, apiRequest } = useLoadFromApi();
+  const { actualUser, isLogged, company } = useUserLogged();
+  const { data, loading, apiRequest, setData, setLoading } = useLoadFromApi();
   const [createUserModalActived, setCreateUserModalActived] = useState(false);
 
   useEffect(() => {
-    if (isLogged && actualUser.id && actualUser.id >= 0 && actualUser.companyId)
-      apiRequest(findUsers(actualUser.companyId, actualUser.unitId));
-  }, [actualUser, isLogged, apiRequest]);
+    if (
+      isLogged &&
+      actualUser.id &&
+      actualUser.id >= 0 &&
+      actualUser.companyId
+    ) {
+      const unitUsers = company.users.filter(
+        (user) => user.unitId === actualUser.unitId
+      );
+      setData(unitUsers);
+      setLoading(false);
+    }
+  }, [actualUser, isLogged, setData, setLoading, company.users]);
 
   function onChange(event: RadioChangeEvent) {
     if (actualUser.companyId)
       switch (event.target.value) {
         case "userUnit":
-          apiRequest(findUsers(actualUser.companyId, actualUser.unitId));
+          const unitUsers = company.users.filter(
+            (user) => user.unitId === actualUser.unitId
+          );
+          setData(unitUsers);
           break;
         default:
           apiRequest(findUsers(actualUser.companyId));
