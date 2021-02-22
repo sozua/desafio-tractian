@@ -4,20 +4,20 @@ import HighchartsReact from "highcharts-react-official";
 import { useEffect, useState } from "react";
 import useLoadFromApi from "../../hooks/useLoadFromApi";
 import useUserLogged from "../../hooks/useUserLogged";
-import { findAssets } from "../../utils/api";
 import { AssetProps } from "../../utils/types";
 import initialOption from "./initialOption";
 
 const ChartHealthscore = (props: HighchartsReact.Props) => {
   const [options, setOptions] = useState(initialOption);
-  const { data, loading, apiRequest } = useLoadFromApi();
-  const { actualUser } = useUserLogged();
+  const { data, loading, setData, setLoading } = useLoadFromApi();
+  const { actualUser, company } = useUserLogged();
 
   useEffect(() => {
-    if (actualUser.companyId) {
-      apiRequest(findAssets(actualUser.companyId, actualUser.unitId));
+    if (company.assets.length) {
+      setData(company.assets);
+      setLoading(false);
     }
-  }, [actualUser.companyId, actualUser.unitId, apiRequest]);
+  }, [company.assets, actualUser.unitId, setData, setLoading]);
 
   useEffect(() => {
     const series = data.map((asset: AssetProps) => {
