@@ -1,6 +1,7 @@
-import { Form, Input, Radio } from "antd";
+import { Form, Input, Radio, RadioChangeEvent } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import Modal from "antd/lib/modal/Modal";
+import { useState } from "react";
 
 type FormModalProps = {
   title: string;
@@ -8,7 +9,6 @@ type FormModalProps = {
   handleOk: Function;
   handleClose: Function;
   formObj: FormObjType;
-  userCompanyId: number;
 };
 
 interface FormObjType {
@@ -32,6 +32,12 @@ const FormModal = ({
   formObj,
 }: FormModalProps) => {
   const [form] = useForm();
+  const [radioValue, setRadioValue] = useState();
+
+  function onRadioChange(event: RadioChangeEvent) {
+    setRadioValue(event.target.value);
+  }
+
   return (
     <Modal
       title={title}
@@ -61,7 +67,7 @@ const FormModal = ({
               name={name}
               label={label}
               key={label}
-              initialValue={(radioGroup && radioGroup[0].value) || value}
+              initialValue={value}
               rules={[
                 {
                   required: required,
@@ -70,11 +76,11 @@ const FormModal = ({
               ]}
             >
               {type === "radio" ? (
-                <>
-                  {!radioLoading && (
-                    <Radio.Group options={radioGroup} {...rest} />
-                  )}
-                </>
+                <Radio.Group
+                  options={radioGroup}
+                  value={radioValue || (radioGroup && radioGroup[0].value)}
+                  onChange={onRadioChange}
+                />
               ) : (
                 <Input type={type} {...rest} />
               )}
