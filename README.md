@@ -17,9 +17,7 @@
 
 ## :books: Sobre
 
-Como é dito no subtítulo, fiz esse projeto durante meu processo seletivo na Tractian – ainda não tive resposta sobre o meu resultado. Demorei 2 dias para projetar [o projeto no Figma](https://www.figma.com/file/dJBvkWBw84e589kYRy2Yof/Tractian-Challenge?node-id=0%3A1) e 3 dias para desenvolver. Todo o processo de criação foi bem interessante para mim, já que tentei utilizar algumas tecnologias que nunca tive contato antes.
-
-As tecnologias que eu não tive contato antes do desafio foram: [Highcharts](https://www.highcharts.com/), [MomentJS](https://momentjs.com/) e [Ant design](https://ant.design). Todas as 3 me surpreenderam pela facilidade de uso e me despertaram o interesse para tentar criar alguns projetos pessoais utilizando elas (principalmente o Ant design).
+Como é dito no subtítulo, fiz esse projeto durante meu processo seletivo na Tractian – ainda não tive resposta sobre o meu resultado. Demorei 2 dias para projetar [o projeto no Figma](https://www.figma.com/file/dJBvkWBw84e589kYRy2Yof/Tractian-Challenge?node-id=0%3A1) e 3 dias para desenvolver. Todo o processo de criação foi bem interessante, já que tentei utilizar algumas tecnologias que nunca tive contato antes ([Highcharts](https://www.highcharts.com/), [MomentJS](https://momentjs.com/) e [Ant design](https://ant.design)) e que me surpreenderam pela facilidade de uso. Todas elas me despertaram o interesse para tentar criar alguns projetos pessoais utilizando-as.
 
 ## :man_technologist: Tecnologias
 
