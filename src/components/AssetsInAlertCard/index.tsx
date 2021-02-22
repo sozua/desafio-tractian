@@ -8,21 +8,32 @@ import ListCard from "../ListCard";
 import assetsColumnsScheme from "./columnsScheme";
 
 const AssetsInAlertCard = () => {
-  const { actualUser, isLogged } = useUserLogged();
-  const { data, loading, apiRequest } = useLoadFromApi();
+  const { actualUser, isLogged, company } = useUserLogged();
+  const { data, loading, apiRequest, setData, setLoading } = useLoadFromApi();
 
   useEffect(() => {
     if (isLogged && actualUser.companyId)
       apiRequest(findInAlertAssets(actualUser.companyId, actualUser.unitId));
   }, [actualUser, isLogged, apiRequest]);
 
+  useEffect(() => {
+    if (isLogged && actualUser.companyId) {
+      const inAlertAssets = company.assets.map(
+        (asset) => asset.status === "inAlert"
+      );
+      setData(inAlertAssets);
+      setLoading(false);
+    }
+  }, [actualUser, isLogged, company.assets, setData, setLoading]);
+
   function onChange(event: RadioChangeEvent) {
     if (actualUser.companyId)
       switch (event.target.value) {
         case "userUnit":
-          apiRequest(
-            findInAlertAssets(actualUser.companyId, actualUser.unitId)
+          const inAlertAssets = company.assets.map(
+            (asset) => asset.status === "inAlert"
           );
+          setData(inAlertAssets);
           break;
         default:
           apiRequest(findInAlertAssets(actualUser.companyId));

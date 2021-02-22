@@ -9,20 +9,22 @@ import assetsColumnsScheme from "./columnsScheme";
 import ModalCreateAsset from "../ModalCreateAsset";
 
 const AssetsCard = () => {
-  const { actualUser, isLogged } = useUserLogged();
-  const { data, loading, apiRequest } = useLoadFromApi();
+  const { actualUser, isLogged, company } = useUserLogged();
+  const { data, loading, apiRequest, setData, setLoading } = useLoadFromApi();
   const [createAssetModalActived, setCreateAssetModalActived] = useState(false);
 
   useEffect(() => {
-    if (isLogged && actualUser.companyId)
-      apiRequest(findAssets(actualUser.companyId, actualUser.unitId));
-  }, [actualUser, isLogged, apiRequest]);
+    if (isLogged && actualUser.companyId) {
+      setData(company.assets);
+      setLoading(false);
+    }
+  }, [actualUser, isLogged, company.assets, setData, setLoading]);
 
   function onChange(event: RadioChangeEvent) {
     if (actualUser.companyId)
       switch (event.target.value) {
         case "userUnit":
-          apiRequest(findAssets(actualUser.companyId, actualUser.unitId));
+          setData(company.assets);
           break;
         default:
           apiRequest(findAssets(actualUser.companyId));
