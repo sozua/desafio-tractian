@@ -4,6 +4,7 @@ import useUserLogged from "../../hooks/useUserLogged";
 import FormModal from "../FormModal";
 
 import { findUnits, submitAsset } from "../../utils/api";
+import { message } from "antd";
 
 type ModalCreateAssetProps = {
   visible: boolean;
@@ -67,8 +68,16 @@ const ModalCreateAsset = ({ visible, setVisible }: ModalCreateAssetProps) => {
   };
 
   const handleOk = (values: Object) => {
-    return () => {
-      submitAsset({ ...values, companyId: actualUser.companyId });
+    return async () => {
+      const response = await submitAsset({
+        ...values,
+        companyId: actualUser.companyId,
+      });
+      if (response.ok) message.success("Ativo adicionada com sucesso!");
+      else
+        message.error(
+          "Ocorreu um erro durante a adição do novo ativo. Tente novamente mais tarde"
+        );
     };
   };
 
@@ -78,12 +87,11 @@ const ModalCreateAsset = ({ visible, setVisible }: ModalCreateAssetProps) => {
 
   return (
     <FormModal
-      title="Adicionar unidade"
+      title="Adicionar ativo"
       visible={visible}
       handleOk={handleOk}
       handleClose={handleClose}
       formObj={formObj}
-      userCompanyId={actualUser.companyId || -1}
     />
   );
 };
