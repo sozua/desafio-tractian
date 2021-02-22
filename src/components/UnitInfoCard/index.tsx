@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useUserLogged from "../../hooks/useUserLogged";
-import { findUsers, findAssets, findSingleUnit } from "../../utils/api";
 import StatsCard from "../StatsCard";
 
 const initialDataState = [
