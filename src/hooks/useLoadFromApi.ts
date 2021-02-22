@@ -16,7 +16,7 @@ const useLoadFromApi = (initialDataState: any = []) => {
     }
   }, []);
 
-  return { data, loading, apiRequest, setData };
+  return { data, loading, apiRequest, setData, setLoading };
 };
 
 export default useLoadFromApi;
