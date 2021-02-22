@@ -21,7 +21,7 @@ export async function findSingleUnit(unitId: number): Promise<UnitProps> {
 }
 
 export function findUsers(companyId: number, unitId?: number) {
-  return async (): Promise<[]> => {
+  return async (): Promise<UserProps[]> => {
     let data;
     const apiAssetsURI = `${apiURI}/users?companyId=${companyId}`;
 
