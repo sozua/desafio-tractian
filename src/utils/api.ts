@@ -1,4 +1,4 @@
-import { UnityProps, UserProps } from "./types";
+import { UnitProps, UserProps } from "./types";
 
 const apiURI = "https://my-json-server.typicode.com/tractian/fake-api/";
 
@@ -8,13 +8,13 @@ export async function findCompany(id: number) {
   return json;
 }
 
-export async function findUnities(companyId: number) {
+export async function findUnits(companyId: number) {
   const data = await fetch(`${apiURI}/units?companyId=${companyId}`);
   const json = await data.json();
   return json;
 }
 
-export async function findSingleUnity(unitId: number): Promise<UnityProps> {
+export async function findSingleUnit(unitId: number): Promise<UnitProps> {
   const data = await fetch(`${apiURI}/units/${unitId}`);
   const json = await data.json();
   return json;
@@ -84,4 +84,30 @@ export function findSingleAsset(assetId: string) {
     const json = await data.json();
     return json;
   };
+}
+
+export async function submitUser(params: Object) {
+  const header = new Headers();
+  header.append("Content-Type", "application/json");
+
+  const response = await fetch(`${apiURI}/users`, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify(params),
+  });
+  const jsonResponse = await response.json();
+  return jsonResponse;
+}
+
+export async function submitAsset(params: Object) {
+  const header = new Headers();
+  header.append("Content-Type", "application/json");
+
+  const response = await fetch(`${apiURI}/assets`, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify(params),
+  });
+  const jsonResponse = await response.json();
+  return jsonResponse;
 }
