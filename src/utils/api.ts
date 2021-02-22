@@ -1,6 +1,6 @@
 import { UnitProps, UserProps } from "./types";
 
-const apiURI = "https://my-json-server.typicode.com/tractian/fake-api/";
+const apiURI = "https://my-json-server.typicode.com/tractian/fake-api";
 
 export async function findCompany(id: number) {
   const data = await fetch(`${apiURI}/companies/${id}`);
@@ -96,7 +96,7 @@ export async function submitUser(params: Object) {
     body: JSON.stringify(params),
   });
   const jsonResponse = await response.json();
-  return jsonResponse;
+  return { ...jsonResponse, ok: response.ok };
 }
 
 export async function submitAsset(params: Object) {
@@ -109,5 +109,18 @@ export async function submitAsset(params: Object) {
     body: JSON.stringify(params),
   });
   const jsonResponse = await response.json();
-  return jsonResponse;
+  return { ...jsonResponse, ok: response.ok };
+}
+
+export async function editUser(userId: number, params: Object) {
+  const header = new Headers();
+  header.append("Content-Type", "application/json");
+
+  const response = await fetch(`${apiURI}/users/${userId}`, {
+    method: "PATCH",
+    headers: header,
+    body: JSON.stringify(params),
+  });
+  const jsonResponse = await response.json();
+  return { ...jsonResponse, ok: response.ok };
 }
