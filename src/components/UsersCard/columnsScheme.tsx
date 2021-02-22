@@ -1,6 +1,31 @@
+import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import { Button, Space } from "antd";
-import { Link } from "react-router-dom";
+
+import ModalEditUser from "../ModalEditUser";
+
+const EditButton = (record: any) => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <>
+      <Space size="middle">
+        <Button type="primary" ghost onClick={() => setVisible(true)}>
+          <EditOutlined />
+        </Button>
+      </Space>
+      <ModalEditUser
+        visible={visible}
+        setVisible={setVisible}
+        initialData={{
+          id: record.id,
+          name: record.name,
+          email: record.email,
+          unitId: record.unitId,
+        }}
+      />
+    </>
+  );
+};
 
 const usersColumnsScheme = [
   {
@@ -17,15 +42,7 @@ const usersColumnsScheme = [
   {
     title: false,
     key: "options",
-    render: (record: any) => (
-      <Space size="middle">
-        <Link to={`/editar-usuario/${record.id}`}>
-          <Button type="primary" ghost>
-            <EditOutlined />
-          </Button>
-        </Link>
-      </Space>
-    ),
+    render: EditButton,
   },
 ];
 
