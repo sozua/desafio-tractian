@@ -8,32 +8,21 @@ import ListCard from "../ListCard";
 import assetsColumnsScheme from "./columnsScheme";
 
 const AssetsInDowntimeCard = () => {
-  const { actualUser, isLogged, company } = useUserLogged();
-  const { data, loading, apiRequest, setData, setLoading } = useLoadFromApi();
+  const { actualUser, isLogged } = useUserLogged();
+  const { data, loading, apiRequest } = useLoadFromApi();
 
   useEffect(() => {
     if (isLogged && actualUser.companyId)
       apiRequest(findInDowntimeAssets(actualUser.companyId, actualUser.unitId));
   }, [actualUser, isLogged, apiRequest]);
 
-  useEffect(() => {
-    if (isLogged && actualUser.companyId) {
-      const inDowntimeAssets = company.assets.map(
-        (asset) => asset.status === "inDowntime"
-      );
-      setData(inDowntimeAssets);
-      setLoading(false);
-    }
-  }, [actualUser, isLogged, company.assets, setData, setLoading]);
-
   function onChange(event: RadioChangeEvent) {
     if (actualUser.companyId)
       switch (event.target.value) {
         case "userUnit":
-          const inDowntimeAssets = company.assets.map(
-            (asset) => asset.status === "inDowntime"
+          apiRequest(
+            findInDowntimeAssets(actualUser.companyId, actualUser.unitId)
           );
-          setData(inDowntimeAssets);
           break;
         default:
           apiRequest(findInDowntimeAssets(actualUser.companyId));
