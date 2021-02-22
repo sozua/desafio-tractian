@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { StoreTypes } from "../state/store";
-import { findSingleUser } from "../utils/api";
 import { UserProps } from "../utils/types";
 
 const useUserLogged = () => {
@@ -10,22 +9,19 @@ const useUserLogged = () => {
   const company = useSelector((state: StoreTypes) => state.company);
 
   useEffect(() => {
-    async function getUser() {
-      const actualUserData = await findSingleUser(company.actualUser);
-      setActualUser(actualUserData);
-    }
-    if (company.actualUser >= 0) {
+    if (company.actualUser.id && company.actualUser.id >= 0) {
       setIsLogged(true);
-      getUser();
+      setActualUser(company.actualUser);
     } else {
       setIsLogged(false);
     }
-  }, [company]);
+  }, [company.actualUser]);
 
   return {
     isLogged,
     setIsLogged,
     actualUser,
+    company,
   };
 };
 

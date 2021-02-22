@@ -5,14 +5,16 @@ import useUserLogged from "../../hooks/useUserLogged";
 import { Dropdown, Menu } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import { changeActualUser } from "../../state/company/slicer";
+import { findSingleUser } from "../../utils/api";
 
 const HeaderDropdown = () => {
   const { isLogged, actualUser } = useUserLogged();
   const company = useSelector((state: StoreTypes) => state.company);
   const dispatch = useDispatch();
 
-  function handleChangeUser(userId: number = 0) {
-    dispatch(changeActualUser(userId));
+  async function handleChangeUser(userId: number = 0) {
+    const newUserData = await findSingleUser(userId);
+    dispatch(changeActualUser(newUserData));
   }
 
   if (!isLogged) return null;
@@ -22,7 +24,7 @@ const HeaderDropdown = () => {
       <Menu.ItemGroup title={company.name}>
         {company.users.map((user) => (
           <Menu.Item
-            disabled={user.id === company.actualUser}
+            disabled={user.id === company.actualUser.id}
             onClick={() => handleChangeUser(user.id)}
             key={user.id}
           >

@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UnitProps, UserProps } from "../../utils/types";
+import { AssetProps, UnitProps, UserProps } from "../../utils/types";
 
 type SliceProps = {
   name: string;
   units: UnitProps[];
+  assets: AssetProps[];
   users: UserProps[];
-  actualUser: number;
+  actualUser: UserProps;
 };
 
 const initialState: SliceProps = {
   name: "",
   units: [],
+  assets: [],
   users: [],
-  actualUser: -1,
+  actualUser: {},
 };
 
 const companySlicer = createSlice({
@@ -22,39 +24,27 @@ const companySlicer = createSlice({
     changeName(state, action: PayloadAction<string>) {
       state.name = action.payload;
     },
-    clearName(state) {
-      state.name = "";
-    },
     changeUnits(state, action: PayloadAction<[]>) {
       state.units = action.payload;
     },
-    clearUnits(state) {
-      state.units = [];
+    changeAssets(state, action: PayloadAction<[]>) {
+      state.assets = action.payload;
     },
-    changeUsers(state, action: PayloadAction<[]>) {
+    changeUsers(state, action: PayloadAction<UserProps[]>) {
       state.users = action.payload;
     },
-    clearUsers(state) {
-      state.users = [];
-    },
-    changeActualUser(state, action: PayloadAction<number>) {
+    changeActualUser(state, action: PayloadAction<UserProps>) {
       state.actualUser = action.payload;
-    },
-    clearActualUser(state) {
-      state.actualUser = -1;
     },
   },
 });
 
 export const {
   changeName,
-  clearName,
   changeUnits,
-  clearUnits,
+  changeAssets,
   changeUsers,
-  clearUsers,
   changeActualUser,
-  clearActualUser,
 } = companySlicer.actions;
 
 export const companyReducer = companySlicer.reducer;
