@@ -4,6 +4,7 @@ import useUserLogged from "../../hooks/useUserLogged";
 import FormModal from "../FormModal";
 
 import { findUnits, submitUser } from "../../utils/api";
+import { message } from "antd";
 
 type ModalCreateUserProps = {
   visible: boolean;
@@ -56,8 +57,16 @@ const ModalCreateUser = ({ visible, setVisible }: ModalCreateUserProps) => {
   };
 
   const handleOk = (values: Object) => {
-    return () => {
-      submitUser({ ...values, companyId: actualUser.companyId });
+    return async () => {
+      const response = await submitUser({
+        ...values,
+        companyId: actualUser.companyId,
+      });
+      if (response.ok) message.success("Usuário adicionado com sucesso!");
+      else
+        message.error(
+          "Ocorreu um erro durante a adição do novo usuário. Tente novamente mais tarde"
+        );
     };
   };
 
@@ -72,7 +81,6 @@ const ModalCreateUser = ({ visible, setVisible }: ModalCreateUserProps) => {
       handleOk={handleOk}
       handleClose={handleClose}
       formObj={formObj}
-      userCompanyId={actualUser.companyId || -1}
     />
   );
 };
