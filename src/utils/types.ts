@@ -21,7 +21,7 @@ export type AssetProps = {
   companyId?: number;
 };
 
-export type UnityProps = {
+export type UnitProps = {
   id?: number;
   name?: string;
   companyId?: number;

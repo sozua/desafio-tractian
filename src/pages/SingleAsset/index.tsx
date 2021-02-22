@@ -6,7 +6,7 @@ import AppPageHeader from "../../components/PageHeader";
 import MetricsCard from "../../components/MetricsCards";
 import SpecificationsCard from "../../components/SpecificationsCard";
 import useLoadFromApi from "../../hooks/useLoadFromApi";
-import { findSingleAsset, findSingleUnity } from "../../utils/api";
+import { findSingleAsset, findSingleUnit } from "../../utils/api";
 import AssetBasicInfosCard from "../../components/AssetBasicInfosCard";
 
 const SingleAsset = () => {
@@ -15,7 +15,7 @@ const SingleAsset = () => {
 
   useEffect(() => {
     async function getUnitName() {
-      const unitName = (await findSingleUnity(data.unitId)).name || "";
+      const unitName = (await findSingleUnit(data.unitId)).name || "";
       setData((oldData: any) => ({ ...oldData, unitName }));
     }
     apiRequest(findSingleAsset(id));

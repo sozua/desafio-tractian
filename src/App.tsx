@@ -9,10 +9,10 @@ import HeaderMenu from "./components/HeaderMenu";
 import {
   changeActualUser,
   changeName,
-  changeUnities,
+  changeUnits,
   changeUsers,
 } from "./state/company/slicer";
-import { findCompany, findUnities, findUsers } from "./utils/api";
+import { findCompany, findUnits, findUsers } from "./utils/api";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,11 +20,11 @@ function App() {
   useEffect(() => {
     async function loginCompany(companyId: number) {
       const company = await findCompany(companyId);
-      const unities = await findUnities(companyId);
+      const Units = await findUnits(companyId);
       const users = await findUsers(companyId)();
 
       dispatch(changeName(company.name));
-      dispatch(changeUnities(unities));
+      dispatch(changeUnits(Units));
       dispatch(changeUsers(users));
       if (users.length > 0) dispatch(changeActualUser(1));
     }

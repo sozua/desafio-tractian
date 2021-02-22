@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useUserLogged from "../../hooks/useUserLogged";
-import { findUsers, findAssets, findSingleUnity } from "../../utils/api";
+import { findUsers, findAssets, findSingleUnit } from "../../utils/api";
 import StatsCard from "../StatsCard";
 
 const initialDataState = [
@@ -18,7 +18,7 @@ const UnitInfoCard = () => {
     async function fetchData(companyId: number, unitId: number) {
       try {
         setLoading(true);
-        const unitName = (await findSingleUnity(unitId)).name;
+        const unitName = (await findSingleUnit(unitId)).name;
         const usersInUnit = await findUsers(companyId, unitId)();
         const assetsInUnit = await findAssets(companyId, unitId)();
         setData([

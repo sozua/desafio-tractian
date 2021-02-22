@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UnityProps, UserProps } from "../../utils/types";
+import { UnitProps, UserProps } from "../../utils/types";
 
 type SliceProps = {
   name: string;
-  unities: UnityProps[];
+  units: UnitProps[];
   users: UserProps[];
   actualUser: number;
 };
 
 const initialState: SliceProps = {
   name: "",
-  unities: [],
+  units: [],
   users: [],
   actualUser: -1,
 };
@@ -25,11 +25,11 @@ const companySlicer = createSlice({
     clearName(state) {
       state.name = "";
     },
-    changeUnities(state, action: PayloadAction<[]>) {
-      state.unities = action.payload;
+    changeUnits(state, action: PayloadAction<[]>) {
+      state.units = action.payload;
     },
-    clearUnities(state) {
-      state.unities = [];
+    clearUnits(state) {
+      state.units = [];
     },
     changeUsers(state, action: PayloadAction<[]>) {
       state.users = action.payload;
@@ -49,8 +49,8 @@ const companySlicer = createSlice({
 export const {
   changeName,
   clearName,
-  changeUnities,
-  clearUnities,
+  changeUnits,
+  clearUnits,
   changeUsers,
   clearUsers,
   changeActualUser,
