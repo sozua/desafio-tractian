@@ -16,20 +16,22 @@
 </p>
 
 ## :books: Sobre
-Como é dito no subtítulo, fiz esse projeto durante meu processo seletivo na Tractian – ainda não tive resposta sobre o meu resultado. Demorei 2 dias para projetar [o projeto no Figma](https://www.figma.com/file/dJBvkWBw84e589kYRy2Yof/Tractian-Challenge?node-id=0%3A1) e 3 dias para desenvolver, no total 5 dias.
 
-Esse site foi minha primeira experiência com algumas tecnologias que, até então, só tinha ouvido falar, sendo elas: [Highcharts](https://www.highcharts.com/), [MomentJS](https://momentjs.com/) e [Ant design](https://ant.design). Todas essas 3 tecnologias me surpreenderam pela facilidade de uso e me deram ânimo para tentar criar alguns projetos pessoais utilizando elas (principalmente o Ant design).
+Como é dito no subtítulo, fiz esse projeto durante meu processo seletivo na Tractian – ainda não tive resposta sobre o meu resultado. Demorei 2 dias para projetar [o projeto no Figma](https://www.figma.com/file/dJBvkWBw84e589kYRy2Yof/Tractian-Challenge?node-id=0%3A1) e 3 dias para desenvolver. Todo o processo de criação foi bem interessante para mim, já que tentei utilizar algumas tecnologias que nunca tive contato antes.
 
-O ainda contém alguns pequenos problemas que eu pretendo resolver o mais rápido possível – pequenos bugs na interface, solicitações evitáveis feitas ao servidor, etc.
+As tecnologias que eu não tive contato antes do desafio foram: [Highcharts](https://www.highcharts.com/), [MomentJS](https://momentjs.com/) e [Ant design](https://ant.design). Todas as 3 me surpreenderam pela facilidade de uso e me despertaram o interesse para tentar criar alguns projetos pessoais utilizando elas (principalmente o Ant design).
 
 ## :man_technologist: Tecnologias
-  - [ReactJS](https://reactjs.org/)
-  - [Redux](https://redux.js.org/)
-  - [React Router Dom v6](https://reactrouter.com/)
-  - [Highcharts](https://www.highcharts.com/)
-  - [MomentJS](https://momentjs.com/)
-  - [Ant design](https://ant.design)
+
+- [ReactJS](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [React Router Dom v6](https://reactrouter.com/)
+- [Highcharts](https://www.highcharts.com/)
+- [MomentJS](https://momentjs.com/)
+- [Ant design](https://ant.design)
+
 ## :question: Como usar
+
 Para clonar e utilizar essa aplicação, você vai precisar do [Git](https://git-scm.com), [Node.js v10.16][nodejs] ou superior e [Yarn v1.13][yarn] ou superior. Após isso, basta executar essas linhas de comando:
 
 ```bash
