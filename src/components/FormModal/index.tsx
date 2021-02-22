@@ -6,7 +6,7 @@ type FormModalProps = {
   title: string;
   visible?: boolean;
   handleOk: Function;
-  handleCancel: Function;
+  handleClose: Function;
   formObj: FormObjType;
   userCompanyId: number;
 };
@@ -28,9 +28,8 @@ const FormModal = ({
   title,
   visible,
   handleOk,
-  handleCancel,
+  handleClose,
   formObj,
-  userCompanyId,
 }: FormModalProps) => {
   const [form] = useForm();
   return (
@@ -41,9 +40,10 @@ const FormModal = ({
         form.validateFields().then((values) => {
           form.resetFields();
           handleOk(values)();
+          handleClose();
         });
       }}
-      onCancel={() => handleCancel()}
+      onCancel={() => handleClose()}
     >
       <Form form={form} layout="vertical" name={formObj.name}>
         {formObj.inputs.map(

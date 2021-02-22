@@ -72,7 +72,7 @@ const ModalCreateAsset = ({ visible, setVisible }: ModalCreateAssetProps) => {
     };
   };
 
-  async function handleCancel() {
+  async function handleClose() {
     setVisible(false);
   }
 
@@ -81,7 +81,7 @@ const ModalCreateAsset = ({ visible, setVisible }: ModalCreateAssetProps) => {
       title="Adicionar unidade"
       visible={visible}
       handleOk={handleOk}
-      handleCancel={handleCancel}
+      handleClose={handleClose}
       formObj={formObj}
       userCompanyId={actualUser.companyId || -1}
     />
