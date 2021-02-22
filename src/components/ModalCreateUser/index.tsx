@@ -55,6 +55,12 @@ const ModalCreateUser = ({ visible, setVisible }: ModalCreateUserProps) => {
     ],
   };
 
+  const handleOk = (values: Object) => {
+    return () => {
+      submitUser({ ...values, companyId: actualUser.companyId });
+    };
+  };
+
   async function handleCancel() {
     setVisible(false);
   }
@@ -63,7 +69,7 @@ const ModalCreateUser = ({ visible, setVisible }: ModalCreateUserProps) => {
     <FormModal
       title="Adicionar funcionário"
       visible={visible}
-      handleOk={submitUser}
+      handleOk={handleOk}
       handleCancel={handleCancel}
       formObj={formObj}
       userCompanyId={actualUser.companyId || -1}

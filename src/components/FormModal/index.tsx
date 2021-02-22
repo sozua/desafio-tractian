@@ -40,7 +40,7 @@ const FormModal = ({
       onOk={() => {
         form.validateFields().then((values) => {
           form.resetFields();
-          handleOk({ ...values, companyId: userCompanyId });
+          handleOk(values)();
         });
       }}
       onCancel={() => handleCancel()}
