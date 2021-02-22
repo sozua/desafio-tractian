@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useUserLogged from "../../hooks/useUserLogged";
 import { findUsers } from "../../utils/api";
 
@@ -6,10 +6,12 @@ import { Button, RadioChangeEvent } from "antd";
 import useLoadFromApi from "../../hooks/useLoadFromApi";
 import ListCard from "../ListCard";
 import assetsColumnsScheme from "./columnsScheme";
+import ModalCreateUser from "../ModalCreateUser";
 
 const UsersCard = () => {
   const { actualUser, isLogged } = useUserLogged();
   const { data, loading, apiRequest } = useLoadFromApi();
+  const [createUserModalActived, setCreateUserModalActived] = useState(false);
 
   useEffect(() => {
     if (isLogged && actualUser.id && actualUser.id >= 0 && actualUser.companyId)
@@ -33,17 +35,28 @@ const UsersCard = () => {
   ];
 
   return (
-    <ListCard
-      title="Painel de funcionários"
-      radioButtons={radioButtons}
-      onRadioChange={onChange}
-      columns={assetsColumnsScheme}
-      dataSource={data}
-      loading={loading}
-      footerElement={
-        <Button type="primary">Adicionar um novo funcionário</Button>
-      }
-    />
+    <>
+      <ListCard
+        title="Painel de funcionários"
+        radioButtons={radioButtons}
+        onRadioChange={onChange}
+        columns={assetsColumnsScheme}
+        dataSource={data}
+        loading={loading}
+        footerElement={
+          <Button
+            type="primary"
+            onClick={() => setCreateUserModalActived(true)}
+          >
+            Adicionar um novo funcionário
+          </Button>
+        }
+      />
+      <ModalCreateUser
+        visible={createUserModalActived}
+        setVisible={setCreateUserModalActived}
+      />
+    </>
   );
 };
 
